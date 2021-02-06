@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <template id="hms_patient_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                            <t t-foreach="docs" t-as="o">
+                                <table class="table mt-5" style="border:2px solid blue;border-collapse:collapse;">
+                                <tr>
+                                    <td >
+                                        <h2  class=" text-center text-danger font-weight-bold my-5" > Patient Status Report </h2>
+                                    </td>
+                                    <td>
+                                        <img
+                                                class="mx-2"
+                                                width="150"
+                                                heigth="150px"
+                                                t-attf-src="data:image/*;base64,{{o.image}}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Name: <span t-field="o.first_name"/></td>
+                                    <td>Birth date:<span t-field="o.birth_date"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Age: <span t-field="o.age"/></td>
+                                    <td>PCR: <span t-field="o.pcr"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Department: <span t-field="o.department_id"/></td>
+                                    <td>Blood Type: <span t-field="o.blood_type"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Doctors: <span t-field="o.doctor_id"/></td>
+                                    <td>Email: <span t-field="o.email"/></td>
+                                </tr>
+                                 <tr>
+                                        <td colspan="2">
+                                             <h2  class="text-danger font-weight-bold text-center" > Log History </h2>
+                                            <table class="table">
+                                                <tr class="bg-primary">
+                                                    <th class="text-center">User</th>
+                                                    <th class="text-center">Date</th>
+                                                    <th class="text-center">Info</th>
+                                                </tr>
+                                                <t t-foreach="o.log_history_ids" t-as="h">
+                                                    <tr>
+                                                        <td>
+                                                            <span t-field="h.create_uid"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="h.create_date"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="h.description"/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+
+                                            </table>
+                                        </td>
+                                 </tr>
+                                  </table>
+                            </t>
+
+
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

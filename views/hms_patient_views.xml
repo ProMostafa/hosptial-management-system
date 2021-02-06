@@ -1,0 +1,98 @@
+<odoo>
+    <data>
+
+        <record id="patient_tree_view" model="ir.ui.view">
+            <field name="name">Patient Tree View</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name" />
+                    <field name="last_name" />
+                    <field name="birth_date" />
+                    <field name="age" />
+                    <field name="age_computed" />
+                    <field name="history" />
+                    <field name="cr_ratio" />
+                    <field name="blood_type" />
+                    <field name="pcr" />
+                    <field name="address" />
+                    <field name="image" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="patient_Form_view" model="ir.ui.view">
+            <field name="name">Patient Form View</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Change Patient state" name="change_state" type="object"></button>
+                        <field name="state" widget="statusbar" statusbar_visible="Undetermined,Serious,Good,Fair"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Personal Information">
+                                <field name="first_name" />
+                                <field name="last_name" />
+                                <field name="email" />
+                                <field name="birth_date" />
+                                <field name="age" />
+                                <field name="age_computed" />
+                                <field name="image" widget="image"/>
+                            </group>
+                            <group string="Patient Information">
+                                <field name="department_id"
+                                    domain="[('is_open','=',True)]"/>
+                                <field name="department_capacity" />
+                                <field name="doctor_id"  widget="many2many_tags"
+                                    attrs="{'readonly': [('department_id','=',False)]}"
+                                groups="hms.hms_manager_groups"/>
+<!--                                <field name="state" />-->
+                                <field name="pcr"/>
+                                <field name="cr_ratio" attrs="{'required': [('pcr','=',True)]}" />
+                                <field name="blood_type" />
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Address">
+                                <field name="address" />
+                            </page>
+
+                            <page string="History">
+                                <field name="log_history_ids" attrs="{'invisible': [('age','&lt;=',50)]}">
+                                    <tree>
+                                        <field name="create_uid" />
+                                        <field name="create_date" readonly="True" />
+                                        <field name="description" readonly="True" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="patient_action" model="ir.actions.act_window">
+            <field name="name">Patient</field>
+            <field name="res_model">hms.patient</field>
+        </record>
+
+        <menuitem id="hms_root" name="HMS" />
+        <menuitem id="hms_patient_menu" name="Patients" parent="hms_root" action="patient_action"/>
+    </data>
+</odoo>
+
+<!--every record adds in databsae has special functions-->
+
+<!--polish notations operands-->
+<!--attrs="{'invisible': [('age','=',30)]}"    age == 30-->
+<!--attrs="{'invisible': [('age','!=',30)]}"    age != 30-->
+<!--attrs="{'invisible': [('age','like',30)]}"    age like strings-->
+<!--attrs="{'invisible': [('age','ilike',30)]}"    age ilike strings-->
+<!--attrs="{'invisible': [('age','in',30)]}"    age in []-->
+<!--attrs="{'invisible': [('age','not in',30)]}"    age not in []-->
+<!--attrs="{'invisible': [('age','&lt;=',30)]}"    age <= 30-->
+<!--attrs="{'invisible': [('age','&gt;=',30)]}"    age >= 30-->
