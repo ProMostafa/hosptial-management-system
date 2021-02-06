@@ -20,7 +20,18 @@
     2. manager can see all menuitems
     3. patients reports using Qweb 
 # snippets from HMS module 
+![][1] \
+![][2] \
+![][3] \
+![][4] \
+![][5] \
 
+
+[1]: https://github.com/ProMostafa/hosptial-management-system/blob/master/snippets/HMS.png
+[2]: https://github.com/ProMostafa/hosptial-management-system/blob/master/snippets/patient-model1.png
+[3]: https://github.com/ProMostafa/hosptial-management-system/blob/master/snippets/doctor-model.png
+[4]: https://github.com/ProMostafa/hosptial-management-system/blob/master/snippets/department-omdel.png
+[5]: https://github.com/ProMostafa/hosptial-management-system/blob/master/snippets/patient-report.png
 
 
  
